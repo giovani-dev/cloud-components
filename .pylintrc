@@ -63,15 +63,7 @@ confidence=
 disable=C0116, # Missing function or method docstring (missing-function-docstring)
         C0114, # Missing module docstring (missing-module-docstring)
         C0115, # Missing class docstring (missing-class-docstring)
-        W0621, # Redefining name 'field' from outer scope (line 1) (redefined-outer-name)
-        W0613, # Unused argument 'context' (unused-argument)
-        W0703, # Catching too general exception Exception (broad-except)
-        C0411
-#         C0103, # Variable name "<nome da variavel>" doesn't conform to snake_case naming style (invalid-name)
-#         C0304, # Final newline missing (missing-final-newline)
-#         W0703, # Catching too general exception Exception (broad-except)
-#         C0301, # Line too long (117/100) (line-too-long)
-#         E2511, # Invalid unescaped character carriage-return, use "\r" instead. (invalid-character-carriage-return)
+        C0116
 
 # Enable the message, report, category or checker with the given id(s). You can
 # either give multiple identifier separated by comma (,) or put this option
@@ -475,10 +467,3 @@ valid-classmethod-first-arg=cls
 
 # List of valid names for the first argument in a metaclass class method.
 valid-metaclass-classmethod-first-arg=cls
-
-
-[EXCEPTIONS]
-
-# Exceptions that will emit a warning when being caught. Defaults to
-# "Exception".
-overgeneral-exceptions=Exception
