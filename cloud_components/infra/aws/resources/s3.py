@@ -86,7 +86,7 @@ class S3(IStorage):
                     Key=file_path, Body=data, ContentType=content_type
                 )
         except ClientError as err:
-            self.logger.info(
+            self.logger.error(
                 f"An error occurred when try to save a file in S3. Error detail: {err}"
             )
             return False
@@ -98,7 +98,7 @@ class S3(IStorage):
             content = self.bucket.Object(file_path)
             content = content.get()["Body"].read()
         except ClientError as err:
-            self.logger.info(
+            self.logger.error(
                 f"An error occurred when try to get a file in S3. Error detail: {err}"
             )
             return None
