@@ -10,6 +10,7 @@ class TestS3:
     connection_mock: Mock
     env_mock: Mock
     logger_mock: Mock
+    bucket_mock: Mock
 
     def setup_method(self):
         self.connection_mock = Mock(name="connection")
