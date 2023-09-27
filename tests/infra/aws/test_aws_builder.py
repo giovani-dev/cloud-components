@@ -23,7 +23,7 @@ class TestAwsBuilder:
         s3_mock.return_value = "s3 call return"
 
         instance = AwsBuilder(logger=self.logger_mock, env=self.env_mock)
-        s3 = instance.build_storage()
+        s3 = instance.build_storage()  # pylint: disable=C0103
 
         resource_connector_mock.assert_called_once_with(
             logger=self.logger_mock, env=self.env_mock
