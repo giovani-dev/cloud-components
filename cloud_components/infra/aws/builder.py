@@ -41,6 +41,7 @@ class AwsBuilder(IBuilder):
             An instance of S3 class, and a implementation from IStorage
             interface
         """
+        self.logger.info("Building S3 implementation")
         connection = self.resource.connect(resource_name="s3")
         return S3(
             connection=connection,
