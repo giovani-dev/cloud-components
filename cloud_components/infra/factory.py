@@ -37,6 +37,7 @@ class InfraFactory:
         IBuilder
             An IBuilder implemetation called AwsBuilder
         """
+        self.logger.info("Manufacturing AwsBuilder class")
         from cloud_components.infra.aws.builder import (  # pylint: disable=C0415
             AwsBuilder,
         )
