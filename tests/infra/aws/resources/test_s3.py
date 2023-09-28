@@ -1,6 +1,5 @@
 from unittest.mock import Mock
 
-import pytest
 from botocore.exceptions import ClientError
 
 from cloud_components.infra.aws.resources.s3 import S3
@@ -48,7 +47,7 @@ class TestS3:
         )
 
         is_saved = instance.save_file(
-            data=b'pa\xc3\xa7oca de coco',
+            data=b"pa\xc3\xa7oca de coco",
             file_path="test/file.txt",
             content_type="application/octet-stream",
             is_public=True,
