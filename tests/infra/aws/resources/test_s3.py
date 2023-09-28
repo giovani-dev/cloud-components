@@ -41,21 +41,6 @@ class TestS3:
 
         self.connection_mock.Bucket.assert_called_once_with("my-bucket")
 
-    def test_save_file__data_as_an_integer__expected_attribute_error(self):
-        self.connection_mock.Bucket.return_value = self.bucket_mock
-        instance = S3(
-            connection=self.connection_mock, logger=self.logger_mock, env=self.env_mock
-        )
-
-        with pytest.raises(AttributeError):
-            instance.save_file(
-                data=1,
-                file_path="test/file.txt",
-                content_type="application/octet-stream",
-            )
-        self.bucket_mock.put_object.assert_not_called()
-        self.connection_mock.Bucket.assert_not_called()
-
     def test_save_file__file_with_public_acl__expected_file_saved(self):
         S3._bucket = self.bucket_mock  # pylint: disable=W0212
         instance = S3(
@@ -63,7 +48,7 @@ class TestS3:
         )
 
         is_saved = instance.save_file(
-            data="paçoca de coco",  # b'pa\xc3\xa7oca de coco'
+            data=b'pa\xc3\xa7oca de coco',
             file_path="test/file.txt",
             content_type="application/octet-stream",
             is_public=True,
@@ -87,7 +72,7 @@ class TestS3:
         )
 
         is_saved = instance.save_file(
-            data="paçoca de coco",  # b'pa\xc3\xa7oca de coco'
+            data=b"pa\xc3\xa7oca de coco",
             file_path="test/file.txt",
             content_type="application/octet-stream",
         )
@@ -117,7 +102,7 @@ class TestS3:
         )
 
         is_saved = instance.save_file(
-            data="paçoca de coco",  # b'pa\xc3\xa7oca de coco'
+            data=b"pa\xc3\xa7oca de coco",
             file_path="test/file.txt",
             content_type="application/octet-stream",
             is_public=True,
@@ -152,7 +137,7 @@ class TestS3:
         )
 
         is_saved = instance.save_file(
-            data="paçoca de coco",  # b'pa\xc3\xa7oca de coco'
+            data=b"pa\xc3\xa7oca de coco",
             file_path="test/file.txt",
             content_type="application/octet-stream",
         )
@@ -202,7 +187,7 @@ class TestS3:
         )
         file = instance.get_file(file_path="test/file.txt")
 
-        assert file == "paçoca de coco"
+        assert file == b"pa\xc3\xa7oca de coco"
         self.logger_mock.info.assert_called_once_with(
             "Getting file from 'test/file.txt'"
         )

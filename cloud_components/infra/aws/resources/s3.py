@@ -57,7 +57,11 @@ class S3(IStorage):
         self._bucket = self.connection.Bucket(name)
 
     def save_file(
-        self, data: str, file_path: str, content_type: str, is_public: bool = False
+        self,
+        data: bytes,
+        file_path: str,
+        content_type: str,
+        is_public: bool = False,
     ) -> bool:
         """
         Returns
@@ -65,7 +69,6 @@ class S3(IStorage):
         bool
             return true when you can save a file, and false when occurs
         """
-        data = data.encode("utf-8")
         try:
             if is_public:
                 self.logger.info(
@@ -92,7 +95,7 @@ class S3(IStorage):
             return False
         return True
 
-    def get_file(self, file_path: str) -> str | None:
+    def get_file(self, file_path: str) -> bytes | None:
         self.logger.info(f"Getting file from '{file_path}'")
         try:
             content = self.bucket.Object(file_path)
@@ -102,4 +105,4 @@ class S3(IStorage):
                 f"An error occurred when try to get a file in S3. Error detail: {err}"
             )
             return None
-        return content.decode("utf-8") if content else None
+        return content
