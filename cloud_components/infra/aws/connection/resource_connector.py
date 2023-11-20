@@ -25,9 +25,8 @@ class ResourceConnector:
         connector factory
     """
 
-    def __init__(self, logger: ILog, env: IEnviroment) -> None:
+    def __init__(self, logger: ILog) -> None:
         self.logger = logger
-        self.env = env
 
     def connect(self, resource_name: ResourceType):
         """
