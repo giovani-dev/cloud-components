@@ -35,9 +35,8 @@ class AwsBuilder(IBuilder):
         service
     """
 
-    def __init__(self, logger: ILog, env: IEnviroment):
+    def __init__(self, logger: ILog):
         self.logger = logger
-        self.env = env
         self.resource = ResourceConnector(logger=self.logger)
 
     def _set_connection(self, resource_name: ResourceType):
