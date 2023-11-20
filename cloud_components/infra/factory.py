@@ -1,3 +1,4 @@
+from typing import Literal
 from cloud_components.application.interface.infra.builder import IBuilder
 from cloud_components.application.interface.services.enviroment import IEnviroment
 from cloud_components.application.interface.services.log import ILog
@@ -30,7 +31,13 @@ class InfraFactory:
         self.logger = logger
         self.env = env
 
-    def manufacture_aws(self) -> IBuilder:
+    def manufacture_aws(
+        self,
+        access_key: str,
+        secret_access_key: str,
+        env: Literal["local"] | None = None,
+        localstack_url: str | None = None,
+    ) -> IBuilder:
         """
         Returns
         ----------
@@ -42,4 +49,6 @@ class InfraFactory:
             AwsBuilder,
         )
 
-        return AwsBuilder(logger=self.logger, env=self.env)
+        return AwsBuilder(
+            self.logger, access_key, secret_access_key, env, localstack_url
+        )
