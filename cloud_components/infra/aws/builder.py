@@ -54,8 +54,7 @@ class AwsBuilder(IBuilder):
         """
         return S3(
             connection=self._set_connection(resource_name="s3"),
-            logger=self.logger,
-            env=self.env,
+            logger=self.logger
         )
 
     def build_function(self) -> IFunction:
