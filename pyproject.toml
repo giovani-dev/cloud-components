@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "cloud-components"
-version = "2.0.1"
+version = "2.1.2"
 description = ""
 authors = ["Giovani Liskoski Zanini <giovanilzanini@hotmail.com>"]
 license = "MIT"
