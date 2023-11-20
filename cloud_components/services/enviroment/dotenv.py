@@ -1,8 +1,8 @@
 import os
 from typing import Any, Callable
 
-from cloud_components.interface.services.enviroment import IEnviroment
-from cloud_components.interface.services.log import ILog
+from cloud_components.application.interface.services.enviroment import IEnviroment
+from cloud_components.application.interface.services.log import ILog
 
 
 class Dotenv(IEnviroment):  # pylint: disable=C0115

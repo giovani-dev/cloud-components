@@ -1,8 +1,8 @@
 from cloud_components.infra.aws.connection.resource_connector import ResourceConnector
-from cloud_components.interface.infra.builder import IBuilder
-from cloud_components.interface.infra.storage import IStorage
-from cloud_components.interface.services.enviroment import IEnviroment
-from cloud_components.interface.services.log import ILog
+from cloud_components.application.interface.infra.builder import IBuilder
+from cloud_components.application.interface.infra.storage import IStorage
+from cloud_components.application.interface.services.enviroment import IEnviroment
+from cloud_components.application.interface.services.log import ILog
 from cloud_components.infra.aws.resources.s3 import S3
 
 
