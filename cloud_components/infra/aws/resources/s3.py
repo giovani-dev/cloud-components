@@ -43,10 +43,9 @@ class S3(IStorage):
 
     _bucket = None
 
-    def __init__(self, connection: Any, logger: ILog, env: IEnviroment) -> None:
+    def __init__(self, connection: Any, logger: ILog) -> None:
         self.connection = connection
         self.logger = logger
-        self.env = env
 
     @property
     def bucket(self) -> Any:
