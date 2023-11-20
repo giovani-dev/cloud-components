@@ -39,7 +39,6 @@ class TestAwsBuilder:
             "http://localhost:4566",
         )
         s3_mock.assert_called_once_with(
-            connection="connection",
-            logger=self.logger_mock
+            connection="connection", logger=self.logger_mock
         )
         assert s3 == "s3 call return"
