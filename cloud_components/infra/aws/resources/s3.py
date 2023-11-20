@@ -49,7 +49,7 @@ class S3(IStorage):
         self.env = env
 
     @property
-    def bucket(self):
+    def bucket(self) -> Any:
         return self._bucket
 
     @bucket.setter
