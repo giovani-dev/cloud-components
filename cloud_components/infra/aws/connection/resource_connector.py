@@ -1,5 +1,6 @@
-from typing import Literal
-
+from cloud_components.application.interface.services.enviroment import IEnviroment
+from cloud_components.application.interface.services.log import ILog
+from cloud_components.application.types.aws import ResourceType
 from cloud_components.infra.aws.connection.connector_factory import ConnectorFactory
 from cloud_components.application.interface.services.enviroment import IEnviroment
 from cloud_components.application.interface.services.log import ILog
@@ -21,7 +22,7 @@ class ResourceConnector:
 
     Methods
     ----------
-    connect(self, resource_name: Literal["sqs", "dynamodb", "s3", "lambda"])
+    connect(self, resource_name: ResourceType)
         Build a connection resource or connection client from boto3 using a
         connector factory
     """
@@ -30,7 +31,7 @@ class ResourceConnector:
         self.logger = logger
         self.env = env
 
-    def connect(self, resource_name: Literal["sqs", "dynamodb", "s3", "lambda"]):
+    def connect(self, resource_name: ResourceType):
         """
         Params
         ----------
