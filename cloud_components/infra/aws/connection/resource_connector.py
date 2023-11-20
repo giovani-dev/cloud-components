@@ -1,3 +1,4 @@
+from typing import Literal
 from cloud_components.infra.aws.connection.connector_factory import ConnectorFactory
 from cloud_components.application.interface.services.enviroment import IEnviroment
 from cloud_components.application.interface.services.log import ILog
@@ -25,8 +26,19 @@ class ResourceConnector:
         connector factory
     """
 
-    def __init__(self, logger: ILog) -> None:
+    def __init__(
+        self,
+        logger: ILog,
+        access_key: str,
+        secret_access_key: str,
+        env: Literal["local"] | None = None,
+        localstack_url: str | None = None,
+    ) -> None:
         self.logger = logger
+        self.access_key = access_key
+        self.secret_access_key = secret_access_key
+        self.localstack_url = localstack_url
+        self.env = env
 
     def connect(self, resource_name: ResourceType):
         """
@@ -40,22 +52,20 @@ class ResourceConnector:
         Any:
             An object from boto3.resource or boto3.client based in resource name
         """
-        env = self.env.get(env_name="ENV")
-        localstack_url = self.env.get(env_name="LOCALSTACK_URL")
-        if env == "local" and localstack_url:
+        if self.env == "local" and self.localstack_url:
             self.logger.info(f"Connecting to {resource_name} at local enviroment")
             return ConnectorFactory.manufacture(
                 resource=resource_name,
-                aws_access_key_id=self.env.get(env_name="AWS_ACCESS_KEY"),
-                aws_secret_access_key=self.env.get(env_name="AWS_SECRET_ACCESS_KEY"),
-                endpoint_url=localstack_url,
+                aws_access_key_id=self.access_key,
+                aws_secret_access_key=self.secret_access_key,
+                endpoint_url=self.localstack_url,
             )
-        if env == "local" and not localstack_url:
+        if self.env == "local" and not self.localstack_url:
             self.logger.info(f"Connecting to {resource_name}")
             return ConnectorFactory.manufacture(
                 resource=resource_name,
-                aws_access_key_id=self.env.get(env_name="AWS_ACCESS_KEY"),
-                aws_secret_access_key=self.env.get(env_name="AWS_SECRET_ACCESS_KEY"),
+                aws_access_key_id=self.access_key,
+                aws_secret_access_key=self.secret_access_key,
             )
         self.logger.info(f"Connecting to {resource_name}")
         return ConnectorFactory.manufacture(resource=resource_name)
