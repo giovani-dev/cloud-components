@@ -1,9 +1,16 @@
+from cloud_components.application.interface.infra.event import IEvent
+from cloud_components.application.interface.infra.function import IFunction
+from cloud_components.application.interface.infra.queue import IQueue
+from cloud_components.application.types.aws import ResourceType
 from cloud_components.infra.aws.connection.resource_connector import ResourceConnector
-from cloud_components.interface.infra.builder import IBuilder
-from cloud_components.interface.infra.storage import IStorage
-from cloud_components.interface.services.enviroment import IEnviroment
-from cloud_components.interface.services.log import ILog
+from cloud_components.application.interface.infra.builder import IBuilder
+from cloud_components.application.interface.infra.storage import IStorage
+from cloud_components.application.interface.services.enviroment import IEnviroment
+from cloud_components.application.interface.services.log import ILog
+from cloud_components.infra.aws.resources.lambda_function import Lambda
 from cloud_components.infra.aws.resources.s3 import S3
+from cloud_components.infra.aws.resources.sqs import Sqs
+from cloud_components.infra.aws.resources.sns import Sns
 
 
 class AwsBuilder(IBuilder):
@@ -33,6 +40,10 @@ class AwsBuilder(IBuilder):
         self.env = env
         self.resource = ResourceConnector(logger=self.logger, env=self.env)
 
+    def _set_connection(self, resource_name: ResourceType):
+        self.logger.info(f"Building {resource_name} implementation")
+        return self.resource.connect(resource_name=resource_name)
+
     def build_storage(self) -> IStorage:
         """
         Returns
@@ -41,10 +52,23 @@ class AwsBuilder(IBuilder):
             An instance of S3 class, and a implementation from IStorage
             interface
         """
-        self.logger.info("Building S3 implementation")
-        connection = self.resource.connect(resource_name="s3")
         return S3(
-            connection=connection,
+            connection=self._set_connection(resource_name="s3"),
             logger=self.logger,
             env=self.env,
+        )
+
+    def build_function(self) -> IFunction:
+        return Lambda(
+            connection=self._set_connection(resource_name="lambda"), logger=self.logger
+        )
+
+    def build_queue(self) -> IQueue:
+        return Sqs(
+            connection=self._set_connection(resource_name="sqs"), logger=self.logger
+        )
+
+    def build_event(self) -> IEvent:
+        return Sns(
+            connection=self._set_connection(resource_name="sns"), logger=self.logger
         )

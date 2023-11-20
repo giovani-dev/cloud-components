@@ -1,6 +1,5 @@
-from typing import Literal
-
 import boto3
+from cloud_components.application.types.aws import ResourceType
 
 
 class ConnectorFactory:
@@ -17,7 +16,7 @@ class ConnectorFactory:
     """
 
     @staticmethod
-    def manufacture(resource: Literal["sqs", "dynamodb", "s3", "lambda"], **kwargs):
+    def manufacture(resource: ResourceType, **kwargs):
         """
         Params
         ----------
@@ -31,6 +30,6 @@ class ConnectorFactory:
         Any
             boto3.client or boto3.resource
         """
-        if resource == "lambda":
+        if resource in ["lambda", "sns"]:
             return boto3.client(resource, **kwargs)
         return boto3.resource(resource, **kwargs)

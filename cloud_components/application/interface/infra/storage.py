@@ -1,9 +1,10 @@
 from abc import ABC, abstractmethod
+from typing import Any
 
 
-class IStorage(ABC):  # pylint: disable=C0115
+class IStorage(ABC):
     @abstractmethod
-    def save_file(  # pylint: disable=C0116
+    def save_file(
         self,
         data: str,
         file_path: str,
@@ -13,10 +14,15 @@ class IStorage(ABC):  # pylint: disable=C0115
         raise NotImplementedError
 
     @abstractmethod
-    def get_file(self, file_path: str) -> str | None:  # pylint: disable=C0116
+    def get_file(self, file_path: str) -> str | None:
         raise NotImplementedError
 
     @property
     @abstractmethod
-    def bucket(self):  # pylint: disable=C0116
+    def bucket(self) -> Any:
+        raise NotImplementedError
+
+    @bucket.setter
+    @abstractmethod
+    def bucket(self, name: str):
         raise NotImplementedError

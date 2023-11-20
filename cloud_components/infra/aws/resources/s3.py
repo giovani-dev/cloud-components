@@ -1,9 +1,9 @@
 from typing import Any
 from botocore.exceptions import ClientError
 
-from cloud_components.interface.services.log import ILog
-from cloud_components.interface.services.enviroment import IEnviroment
-from cloud_components.interface.infra.storage import IStorage
+from cloud_components.application.interface.services.log import ILog
+from cloud_components.application.interface.services.enviroment import IEnviroment
+from cloud_components.application.interface.infra.storage import IStorage
 
 
 class S3(IStorage):
@@ -49,7 +49,7 @@ class S3(IStorage):
         self.env = env
 
     @property
-    def bucket(self):
+    def bucket(self) -> Any:
         return self._bucket
 
     @bucket.setter
