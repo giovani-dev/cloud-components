@@ -53,8 +53,7 @@ class AwsBuilder(IBuilder):
             interface
         """
         return S3(
-            connection=self._set_connection(resource_name="s3"),
-            logger=self.logger
+            connection=self._set_connection(resource_name="s3"), logger=self.logger
         )
 
     def build_function(self) -> IFunction:
