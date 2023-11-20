@@ -16,8 +16,13 @@ class TestInfraFactory:
         self, aws_builder_mock: Mock
     ):
         instance = InfraFactory(logger=self.logger_mock, env=self.env_mock)
-        instance.manufacture_aws()
+        instance.manufacture_aws(
+            access_key="lol",
+            secret_access_key="abcdefgh",
+            env="local",
+            localstack_url="http://localhost:4566",
+        )
 
         aws_builder_mock.assert_called_once_with(
-            logger=self.logger_mock, env=self.env_mock
+            self.logger_mock, "lol", "abcdefgh", "local", "http://localhost:4566"
         )

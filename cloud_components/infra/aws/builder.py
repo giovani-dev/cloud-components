@@ -1,3 +1,4 @@
+from typing import Literal
 from cloud_components.application.interface.infra.event import IEvent
 from cloud_components.application.interface.infra.function import IFunction
 from cloud_components.application.interface.infra.queue import IQueue
@@ -5,7 +6,6 @@ from cloud_components.application.types.aws import ResourceType
 from cloud_components.infra.aws.connection.resource_connector import ResourceConnector
 from cloud_components.application.interface.infra.builder import IBuilder
 from cloud_components.application.interface.infra.storage import IStorage
-from cloud_components.application.interface.services.enviroment import IEnviroment
 from cloud_components.application.interface.services.log import ILog
 from cloud_components.infra.aws.resources.lambda_function import Lambda
 from cloud_components.infra.aws.resources.s3 import S3
@@ -35,10 +35,18 @@ class AwsBuilder(IBuilder):
         service
     """
 
-    def __init__(self, logger: ILog, env: IEnviroment):
+    def __init__(
+        self,
+        logger: ILog,
+        access_key: str,
+        secret_access_key: str,
+        env: Literal["local"] | None = None,
+        localstack_url: str | None = None,
+    ) -> None:
         self.logger = logger
-        self.env = env
-        self.resource = ResourceConnector(logger=self.logger, env=self.env)
+        self.resource = ResourceConnector(
+            self.logger, access_key, secret_access_key, env, localstack_url
+        )
 
     def _set_connection(self, resource_name: ResourceType):
         self.logger.info(f"Building {resource_name} implementation")
@@ -53,9 +61,7 @@ class AwsBuilder(IBuilder):
             interface
         """
         return S3(
-            connection=self._set_connection(resource_name="s3"),
-            logger=self.logger,
-            env=self.env,
+            connection=self._set_connection(resource_name="s3"), logger=self.logger
         )
 
     def build_function(self) -> IFunction:

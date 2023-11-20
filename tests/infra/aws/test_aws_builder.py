@@ -22,15 +22,23 @@ class TestAwsBuilder:
 
         s3_mock.return_value = "s3 call return"
 
-        instance = AwsBuilder(logger=self.logger_mock, env=self.env_mock)
+        instance = AwsBuilder(
+            logger=self.logger_mock,
+            access_key="xpto",
+            secret_access_key="abcdef",
+            env="local",
+            localstack_url="http://localhost:4566",
+        )
         s3 = instance.build_storage()  # pylint: disable=C0103
 
         resource_connector_mock.assert_called_once_with(
-            logger=self.logger_mock, env=self.env_mock
+            self.logger_mock,
+            "xpto",
+            "abcdef",
+            "local",
+            "http://localhost:4566",
         )
         s3_mock.assert_called_once_with(
-            connection="connection",
-            logger=self.logger_mock,
-            env=self.env_mock,
+            connection="connection", logger=self.logger_mock
         )
         assert s3 == "s3 call return"

@@ -2,7 +2,6 @@ from typing import Any
 from botocore.exceptions import ClientError
 
 from cloud_components.application.interface.services.log import ILog
-from cloud_components.application.interface.services.enviroment import IEnviroment
 from cloud_components.application.interface.infra.storage import IStorage
 
 
@@ -43,10 +42,9 @@ class S3(IStorage):
 
     _bucket = None
 
-    def __init__(self, connection: Any, logger: ILog, env: IEnviroment) -> None:
+    def __init__(self, connection: Any, logger: ILog) -> None:
         self.connection = connection
         self.logger = logger
-        self.env = env
 
     @property
     def bucket(self) -> Any:

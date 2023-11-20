@@ -13,38 +13,29 @@ class TestS3:
 
     def setup_method(self):
         self.connection_mock = Mock(name="connection")
-        self.env_mock = Mock(name="env")
         self.logger_mock = Mock(name="logger")
         self.bucket_mock = Mock(name="bucket")
 
     def test_bucket__get_bucket_without_setting_its_name__expected_none_return(self):
-        instance = S3(
-            connection=self.connection_mock, logger=self.logger_mock, env=self.env_mock
-        )
+        instance = S3(connection=self.connection_mock, logger=self.logger_mock)
 
         assert not instance.bucket
 
     def test_bucket__get_bucket_setted__expected_bucket_object_returned(self):
         S3._bucket = self.bucket_mock  # pylint: disable=W0212
-        instance = S3(
-            connection=self.connection_mock, logger=self.logger_mock, env=self.env_mock
-        )
+        instance = S3(connection=self.connection_mock, logger=self.logger_mock)
 
         assert instance.bucket == self.bucket_mock
 
     def test_bucket__set_bucket_name__expected_bucket_method_call_from_connection(self):
-        instance = S3(
-            connection=self.connection_mock, logger=self.logger_mock, env=self.env_mock
-        )
+        instance = S3(connection=self.connection_mock, logger=self.logger_mock)
         instance.bucket = "my-bucket"
 
         self.connection_mock.Bucket.assert_called_once_with("my-bucket")
 
     def test_save_file__file_with_public_acl__expected_file_saved(self):
         S3._bucket = self.bucket_mock  # pylint: disable=W0212
-        instance = S3(
-            connection=self.connection_mock, logger=self.logger_mock, env=self.env_mock
-        )
+        instance = S3(connection=self.connection_mock, logger=self.logger_mock)
 
         is_saved = instance.save_file(
             data=b"pa\xc3\xa7oca de coco",
@@ -66,9 +57,7 @@ class TestS3:
 
     def test_save_file__file_with_private_acl__expected_file_saved(self):
         S3._bucket = self.bucket_mock  # pylint: disable=W0212
-        instance = S3(
-            connection=self.connection_mock, logger=self.logger_mock, env=self.env_mock
-        )
+        instance = S3(connection=self.connection_mock, logger=self.logger_mock)
 
         is_saved = instance.save_file(
             data=b"pa\xc3\xa7oca de coco",
@@ -96,9 +85,7 @@ class TestS3:
             },
         )
         S3._bucket = self.bucket_mock  # pylint: disable=W0212
-        instance = S3(
-            connection=self.connection_mock, logger=self.logger_mock, env=self.env_mock
-        )
+        instance = S3(connection=self.connection_mock, logger=self.logger_mock)
 
         is_saved = instance.save_file(
             data=b"pa\xc3\xa7oca de coco",
@@ -131,9 +118,7 @@ class TestS3:
             },
         )
         S3._bucket = self.bucket_mock  # pylint: disable=W0212
-        instance = S3(
-            connection=self.connection_mock, logger=self.logger_mock, env=self.env_mock
-        )
+        instance = S3(connection=self.connection_mock, logger=self.logger_mock)
 
         is_saved = instance.save_file(
             data=b"pa\xc3\xa7oca de coco",
@@ -163,9 +148,7 @@ class TestS3:
         )
         S3._bucket = self.bucket_mock  # pylint: disable=W0212
 
-        instance = S3(
-            connection=self.connection_mock, logger=self.logger_mock, env=self.env_mock
-        )
+        instance = S3(connection=self.connection_mock, logger=self.logger_mock)
         file = instance.get_file(file_path="test/file.txt")
 
         assert not file
@@ -181,9 +164,7 @@ class TestS3:
         self.bucket_mock.Object.return_value = object_mock
 
         S3._bucket = self.bucket_mock  # pylint: disable=W0212
-        instance = S3(
-            connection=self.connection_mock, logger=self.logger_mock, env=self.env_mock
-        )
+        instance = S3(connection=self.connection_mock, logger=self.logger_mock)
         file = instance.get_file(file_path="test/file.txt")
 
         assert file == b"pa\xc3\xa7oca de coco"
@@ -202,9 +183,7 @@ class TestS3:
         self.bucket_mock.Object.return_value = object_mock
 
         S3._bucket = self.bucket_mock  # pylint: disable=W0212
-        instance = S3(
-            connection=self.connection_mock, logger=self.logger_mock, env=self.env_mock
-        )
+        instance = S3(connection=self.connection_mock, logger=self.logger_mock)
         file = instance.get_file(file_path="test/file.txt")
 
         assert not file
@@ -223,9 +202,7 @@ class TestS3:
             },
         )
         S3._bucket = self.bucket_mock  # pylint: disable=W0212
-        instance = S3(
-            connection=self.connection_mock, logger=self.logger_mock, env=self.env_mock
-        )
+        instance = S3(connection=self.connection_mock, logger=self.logger_mock)
         file = instance.get_file(file_path="test/file.txt")
 
         assert not file
