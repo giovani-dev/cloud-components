@@ -22,7 +22,9 @@ class Sns(IEvent):
     def source(self, value: str):
         self._source = value
 
-    def send(self, message: dict, message_structere: Literal["json"] = "json") -> bool:
+    def send(
+        self, message: dict, message_structere: Literal["json"] | None = None
+    ) -> bool:
         self.logger.info(f"Sending message to {self.source}")
         try:
             if message_structere:

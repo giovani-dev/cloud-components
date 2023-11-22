@@ -14,6 +14,8 @@ class Sqs(IQueue):
 
     @property
     def queue(self) -> Any:
+        if not self._queue:
+            raise ValueError("Queue not found")
         return self._queue
 
     @queue.setter
