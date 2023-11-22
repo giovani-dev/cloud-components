@@ -1,6 +1,6 @@
 from typing import Literal
 from cloud_components.infra.aws.connection.connector_factory import ConnectorFactory
-from cloud_components.application.interface.services.log import ILog
+from cloud_components.application.interface.services.log.logger import ILogger
 from cloud_components.application.types.aws import ResourceType
 
 
@@ -13,8 +13,8 @@ class ResourceConnector:
 
     Attributes
     ----------
-    logger : ILog
-        Logger object that share the same methods with ILog
+    logger : ILogger
+        Logger object that share the same methods with ILogger
     env : IEnviroment
         Enviroment class instance
 
@@ -27,7 +27,7 @@ class ResourceConnector:
 
     def __init__(
         self,
-        logger: ILog,
+        logger: ILogger,
         access_key: str,
         secret_access_key: str,
         env: Literal["local"] | None = None,

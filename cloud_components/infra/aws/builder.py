@@ -6,7 +6,7 @@ from cloud_components.application.types.aws import ResourceType
 from cloud_components.infra.aws.connection.resource_connector import ResourceConnector
 from cloud_components.application.interface.infra.builder import IBuilder
 from cloud_components.application.interface.infra.storage import IStorage
-from cloud_components.application.interface.services.log import ILog
+from cloud_components.application.interface.services.log.logger import ILogger
 from cloud_components.infra.aws.resources.lambda_function import Lambda
 from cloud_components.infra.aws.resources.s3 import S3
 from cloud_components.infra.aws.resources.sqs import Sqs
@@ -23,8 +23,8 @@ class AwsBuilder(IBuilder):
 
     Attributes
     ----------
-    logger : ILog
-        Logger object that share the same methods with ILog
+    logger : ILogger
+        Logger object that share the same methods with ILogger
     env : IEnviroment
         Enviroment class instance
 
@@ -37,7 +37,7 @@ class AwsBuilder(IBuilder):
 
     def __init__(
         self,
-        logger: ILog,
+        logger: ILogger,
         access_key: str,
         secret_access_key: str,
         env: Literal["local"] | None = None,

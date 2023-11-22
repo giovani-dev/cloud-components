@@ -1,7 +1,6 @@
 from typing import Literal
 from cloud_components.application.interface.infra.builder import IBuilder
-from cloud_components.application.interface.services.enviroment import IEnviroment
-from cloud_components.application.interface.services.log import ILog
+from cloud_components.application.interface.services.log.logger import ILogger
 
 
 class InfraFactory:
@@ -14,7 +13,7 @@ class InfraFactory:
 
     Attributes
     ----------
-    logger : ILog
+    logger : ILogger
         blabla
     env : IEnviroment
         blabla
@@ -27,9 +26,8 @@ class InfraFactory:
         slow in terms of import.
     """
 
-    def __init__(self, logger: ILog, env: IEnviroment) -> None:
+    def __init__(self, logger: ILogger) -> None:
         self.logger = logger
-        self.env = env
 
     def manufacture_aws(
         self,

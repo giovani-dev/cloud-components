@@ -1,12 +1,14 @@
 import os
 from typing import Any, Callable
 
-from cloud_components.application.interface.services.enviroment import IEnviroment
-from cloud_components.application.interface.services.log import ILog
+from cloud_components.application.interface.services.enviroment.enviroment import (
+    IEnviroment,
+)
+from cloud_components.application.interface.services.log.logger import ILogger
 
 
 class Dotenv(IEnviroment):  # pylint: disable=C0115
-    def __init__(self, log: ILog) -> None:
+    def __init__(self, log: ILogger) -> None:
         self.log = log
 
     def load(self):  # pylint: disable=C0116

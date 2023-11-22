@@ -1,12 +1,12 @@
 from typing import Any
 from cloud_components.application.interface.infra.function import IFunction
-from cloud_components.application.interface.services.log import ILog
+from cloud_components.application.interface.services.log.logger import ILogger
 
 
 class Lambda(IFunction):
     _name: str | None = None
 
-    def __init__(self, connection: Any, logger: ILog) -> None:
+    def __init__(self, connection: Any, logger: ILogger) -> None:
         self.connection = connection
         self.logger = logger
 

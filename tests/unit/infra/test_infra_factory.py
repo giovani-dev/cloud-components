@@ -15,7 +15,7 @@ class TestInfraFactory:
     def test_manufacture_aws__call_aws_builder_with_logger_and_env_mock__expected_one_call(
         self, aws_builder_mock: Mock
     ):
-        instance = InfraFactory(logger=self.logger_mock, env=self.env_mock)
+        instance = InfraFactory(logger=self.logger_mock)
         instance.manufacture_aws(
             access_key="lol",
             secret_access_key="abcdefgh",
