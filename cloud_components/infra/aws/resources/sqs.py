@@ -1,14 +1,14 @@
 from typing import Any
 from botocore.exceptions import ClientError
 from cloud_components.application.interface.infra.queue import IQueue
-from cloud_components.application.interface.services.log import ILog
+from cloud_components.application.interface.services.log.logger import ILogger
 
 
 class Sqs(IQueue):
     _queue: str | None = None
     _queue_name: str | None = None
 
-    def __init__(self, connection: Any, logger: ILog) -> None:
+    def __init__(self, connection: Any, logger: ILogger) -> None:
         self.connection = connection
         self.logger = logger
 

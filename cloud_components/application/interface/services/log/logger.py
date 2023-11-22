@@ -1,7 +1,7 @@
 from abc import ABC, abstractmethod
 
 
-class ILog(ABC):  # pylint: disable=C0115
+class ILogger(ABC):  # pylint: disable=C0115
     @abstractmethod
     def debug(self, message: str) -> None:  # pylint: disable=C0116
         raise NotADirectoryError

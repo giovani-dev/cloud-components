@@ -2,13 +2,13 @@ import json
 from typing import Any, Literal
 from botocore.exceptions import ClientError
 from cloud_components.application.interface.infra.event import IEvent
-from cloud_components.application.interface.services.log import ILog
+from cloud_components.application.interface.services.log.logger import ILogger
 
 
 class Sns(IEvent):
     _source: str | None = None
 
-    def __init__(self, connection: Any, logger: ILog):
+    def __init__(self, connection: Any, logger: ILogger):
         self.connection = connection
         self.logger = logger
 

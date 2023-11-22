@@ -1,7 +1,7 @@
 from typing import Any
 from botocore.exceptions import ClientError
 
-from cloud_components.application.interface.services.log import ILog
+from cloud_components.application.interface.services.log.logger import ILogger
 from cloud_components.application.interface.infra.storage import IStorage
 
 
@@ -17,8 +17,8 @@ class S3(IStorage):
     ----------
     connection : Any
         Instance of resource object from boto3
-    logger : ILog
-        Logger object that share the same methods with ILog
+    logger : ILogger
+        Logger object that share the same methods with ILogger
     env : IEnviroment
         Enviroment class instance
     bucket : Any
@@ -28,8 +28,8 @@ class S3(IStorage):
     ----------
     connection : Any
         Instance of resource function from boto3
-    logger : ILog
-        Logger object that share the same methods with ILog
+    logger : ILogger
+        Logger object that share the same methods with ILogger
     env : IEnviroment
         Enviroment class instance
 
@@ -42,7 +42,7 @@ class S3(IStorage):
 
     _bucket = None
 
-    def __init__(self, connection: Any, logger: ILog) -> None:
+    def __init__(self, connection: Any, logger: ILogger) -> None:
         self.connection = connection
         self.logger = logger
 
