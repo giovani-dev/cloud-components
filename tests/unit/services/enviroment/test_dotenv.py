@@ -42,7 +42,7 @@ class TestDotEnv:
         instance = Dotenv(log=self.logger_mock)
         instance.get(env_name)
 
-        getenv_mock.assert_called_once_with(env_name)
+        getenv_mock.assert_called_once_with(env_name, None)
 
     @patch("os.getenv")
     def test_get__casting_value__expected_cast_call(self, getenv_mock: Mock):
@@ -52,4 +52,4 @@ class TestDotEnv:
         instance = Dotenv(log=self.logger_mock)
         instance.get(env_name, cast_mock)
 
-        getenv_mock.assert_called_once_with(env_name)
+        getenv_mock.assert_called_once_with(env_name, None)
