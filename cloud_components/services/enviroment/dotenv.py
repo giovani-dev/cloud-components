@@ -21,7 +21,7 @@ class Dotenv(IEnviroment):  # pylint: disable=C0115
             )
 
     def get(  # pylint: disable=C0116
-        self, env_name: str, cast: Callable[[str], Any] | None = None
+        self, env_name: str, cast: Callable[[Any], Any] | None = None
     ) -> Any:
         value = os.getenv(env_name)
         return value if not cast else cast(value)

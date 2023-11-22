@@ -9,6 +9,6 @@ class IEnviroment(ABC):  # pylint: disable=C0115
 
     @abstractmethod
     def get(  # pylint: disable=C0116
-        self, env_name: str, cast: Callable[[str], Any] | None = None
+        self, env_name: str, cast: Callable[[Any], Any] | None = None
     ) -> Any:
         raise NotImplementedError
