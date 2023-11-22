@@ -12,7 +12,7 @@ class Dotenv(IEnviroment):  # pylint: disable=C0115
     def load(self):  # pylint: disable=C0116
         self.log.info("Loading enviroment variables")
         try:
-            from dotenv import load_dotenv  # pylint: disable=C0415
+            from dotenv import load_dotenv  # pylint: disable=C0415, W0406
 
             load_dotenv()
         except ImportError as err:
