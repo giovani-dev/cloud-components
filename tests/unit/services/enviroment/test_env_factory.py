@@ -1,6 +1,6 @@
 from unittest.mock import Mock, patch
 
-from cloud_components.services.enviroment.factory import EnvFactory
+from cloud_components.services.env.factory import EnvFactory
 
 
 class TestEnvFactory:
@@ -9,7 +9,7 @@ class TestEnvFactory:
     def setup_method(self):
         self.logger_mock = Mock(name="logger")
 
-    @patch("cloud_components.services.enviroment.factory.Dotenv")
+    @patch("cloud_components.services.env.factory.Dotenv")
     def test_manufacture_dotenv__call_dotenv_class__expected_dotenv_constructor_call_with_logger_mock(  # pylint: disable=C0116,C0301
         self, dotenv_mock: Mock
     ):
