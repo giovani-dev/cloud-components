@@ -67,4 +67,8 @@ class ResourceConnector:
                 aws_secret_access_key=self.secret_access_key,
             )
         self.logger.info(f"Connecting to {resource_name}")
-        return ConnectorFactory.manufacture(resource=resource_name)
+        return ConnectorFactory.manufacture(
+            resource=resource_name,
+            aws_access_key_id=self.access_key,
+            aws_secret_access_key=self.secret_access_key,
+        )
