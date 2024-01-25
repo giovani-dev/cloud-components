@@ -31,6 +31,9 @@ class TestAwsBuilder:
         s3.assert_called_once_with(
             connection="fake-connection", logger=self.logger_mock
         )
+        resource_connector.assert_called_once_with(
+            self.logger_mock, "xpto", "abcdef", "local", "http://localhost:4566"
+        )
 
     @patch("cloud_components.infra.aws.builder.AwsBuilder._set_connection")
     @patch("cloud_components.infra.aws.builder.Lambda")
