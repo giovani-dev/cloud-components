@@ -15,7 +15,10 @@ class TestAwsBuilder:
     @patch("cloud_components.infra.aws.builder.S3")
     @patch("cloud_components.infra.aws.builder.ResourceConnector")
     def test_build_storage_method__should_call_s3_class(
-        self, resource_connector: Mock, s3: Mock, set_connection: Mock
+        self,
+        resource_connector: Mock,
+        s3: Mock,  # pylint: disable=C0103
+        set_connection: Mock,
     ):
         set_connection.return_value = "fake-connection"
         instance = AwsBuilder(
