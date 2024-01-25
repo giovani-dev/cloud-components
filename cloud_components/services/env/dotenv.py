@@ -1,7 +1,7 @@
 import os
 from typing import Any, Callable
 
-from cloud_components.application.interface.services.env.enviroment import (
+from cloud_components.application.interface.services.enviroment.enviroment import (
     IEnviroment,
 )
 from cloud_components.application.interface.services.log.logger import ILogger
