@@ -55,6 +55,9 @@ class TestAwsBuilder:
         _lambda.assert_called_once_with(
             connection="fake-connection", logger=self.logger_mock
         )
+        resource_connector.assert_called_once_with(
+            self.logger_mock, "xpto", "abcdef", "local", "http://localhost:4566"
+        )
 
     @patch("cloud_components.infra.aws.builder.AwsBuilder._set_connection")
     @patch("cloud_components.infra.aws.builder.Sqs")
@@ -76,6 +79,9 @@ class TestAwsBuilder:
         sqs.assert_called_once_with(
             connection="fake-connection", logger=self.logger_mock
         )
+        resource_connector.assert_called_once_with(
+            self.logger_mock, "xpto", "abcdef", "local", "http://localhost:4566"
+        )
 
     @patch("cloud_components.infra.aws.builder.AwsBuilder._set_connection")
     @patch("cloud_components.infra.aws.builder.Sns")
@@ -96,4 +102,7 @@ class TestAwsBuilder:
         set_connection.assert_called_once_with(resource_name="sns")
         sns.assert_called_once_with(
             connection="fake-connection", logger=self.logger_mock
+        )
+        resource_connector.assert_called_once_with(
+            self.logger_mock, "xpto", "abcdef", "local", "http://localhost:4566"
         )
