@@ -1,8 +1,8 @@
-from cloud_components.application.interface.services.enviroment.enviroment import (
+from cloud_components.application.interface.services.env.enviroment import (
     IEnviroment,
 )
 from cloud_components.application.interface.services.log.logger import ILogger
-from cloud_components.services.enviroment.dotenv import Dotenv
+from cloud_components.services.env.dotenv import Dotenv
 
 
 class EnvFactory:

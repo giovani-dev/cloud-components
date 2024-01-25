@@ -1,6 +1,6 @@
 from unittest.mock import Mock, patch
 
-from cloud_components.services.enviroment.dotenv import Dotenv
+from cloud_components.services.env.dotenv import Dotenv
 
 
 class TestDotEnv:
