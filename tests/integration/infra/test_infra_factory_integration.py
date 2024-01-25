@@ -1,9 +1,12 @@
+from cloud_components.application.interface.services.log.logger import ILogger
 from cloud_components.infra.aws.builder import AwsBuilder
 from cloud_components.infra.factory import InfraFactory
 from cloud_components.services.log.builder import LogBuilder
 
 
 class TestInfraFactoryIntegration:
+    logger: ILogger
+
     def setup_class(self):
         self.logger = LogBuilder().build_loguru()
 
