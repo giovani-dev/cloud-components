@@ -68,4 +68,6 @@ class TestResourceConnector:
         connection = resource_connector.connect("dynamodb")
 
         assert connection == manufactured_connection
-        connection_factory.manufacture.assert_called_once_with(resource="dynamodb")
+        connection_factory.manufacture.assert_called_once_with(
+            resource="dynamodb", aws_access_key_id="abc", aws_secret_access_key="mnop"
+        )
