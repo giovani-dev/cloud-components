@@ -105,7 +105,7 @@ class S3(IStorage):
             return None
         return content
 
-    def ls(self, path: str) -> list[str]:
+    def ls(self, path: str) -> list[str]:  # pylint: disable=C0103
         self.logger.info(f"Listing objects from {path}")
         return [_object.key for _object in self.bucket.objects.filter(Prefix=path)]
 

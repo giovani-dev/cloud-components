@@ -28,7 +28,7 @@ class IStorage(ABC):
         raise NotImplementedError
 
     @abstractmethod
-    def ls(self, path: str) -> list[str]:
+    def ls(self, path: str) -> list[str]:  # pylint: disable=C0103
         raise NotImplementedError
 
     @abstractmethod
