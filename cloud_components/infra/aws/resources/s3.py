@@ -104,3 +104,14 @@ class S3(IStorage):
             )
             return None
         return content
+
+    def ls(self, path: str) -> list[str]:  # pylint: disable=C0103
+        self.logger.info(f"Listing objects from {path}")
+        return [_object.key for _object in self.bucket.objects.filter(Prefix=path)]
+
+    def delete(self, file_path: str) -> bool:
+        try:
+            self.bucket.Object(file_path).delete()
+        except Exception as err:  # pylint: disable=W0612,W0718
+            return False
+        return True

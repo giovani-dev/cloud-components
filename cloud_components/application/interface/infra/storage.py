@@ -26,3 +26,11 @@ class IStorage(ABC):
     @abstractmethod
     def bucket(self, name: str):
         raise NotImplementedError
+
+    @abstractmethod
+    def ls(self, path: str) -> list[str]:  # pylint: disable=C0103
+        raise NotImplementedError
+
+    @abstractmethod
+    def delete(self, file_path: str) -> bool:
+        raise NotImplementedError
