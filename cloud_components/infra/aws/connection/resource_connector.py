@@ -1,4 +1,4 @@
-from typing import Literal
+from typing import Literal, Union
 from cloud_components.infra.aws.connection.connector_factory import ConnectorFactory
 from cloud_components.application.interface.services.log.logger import ILogger
 from cloud_components.application.types.aws import ResourceType
@@ -30,8 +30,8 @@ class ResourceConnector:
         logger: ILogger,
         access_key: str,
         secret_access_key: str,
-        env: Literal["local"] | None = None,
-        localstack_url: str | None = None,
+        env: Union[Literal["local"], None] = None,
+        localstack_url: Union[str, None] = None,
     ) -> None:
         self.logger = logger
         self.access_key = access_key

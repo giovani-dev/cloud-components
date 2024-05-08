@@ -1,5 +1,5 @@
 import os
-from typing import Any, Callable
+from typing import Any, Callable, Union
 
 from cloud_components.application.interface.services.enviroment.enviroment import (
     IEnviroment,
@@ -25,8 +25,8 @@ class Dotenv(IEnviroment):  # pylint: disable=C0115
     def get(  # pylint: disable=C0116
         self,
         env_name: str,
-        cast: Callable[[Any], Any] | None = None,
-        defalt: Any | None = None,
+        cast: Union[Callable[[Any], Any], None] = None,
+        defalt: Union[Any, None] = None,
     ) -> Any:
         value = os.getenv(env_name, defalt)
         return value if not cast else cast(value)

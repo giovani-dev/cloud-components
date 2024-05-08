@@ -1,12 +1,12 @@
 import json
-from typing import Any, Literal
+from typing import Any, Literal, Union
 from botocore.exceptions import ClientError
 from cloud_components.application.interface.infra.event import IEvent
 from cloud_components.application.interface.services.log.logger import ILogger
 
 
 class Sns(IEvent):
-    _source: str | None = None
+    _source: Union[str, None] = None
 
     def __init__(self, connection: Any, logger: ILogger):
         self.connection = connection
@@ -23,7 +23,7 @@ class Sns(IEvent):
         self._source = value
 
     def send(
-        self, message: dict, message_structere: Literal["json"] | None = None
+        self, message: dict, message_structere: Union[Literal["json"], None] = None
     ) -> bool:
         self.logger.info(f"Sending message to {self.source}")
         try:

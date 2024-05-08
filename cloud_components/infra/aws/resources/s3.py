@@ -1,4 +1,4 @@
-from typing import Any
+from typing import Any, Union
 from botocore.exceptions import ClientError
 
 from cloud_components.application.interface.services.log.logger import ILogger
@@ -93,7 +93,7 @@ class S3(IStorage):
             return False
         return True
 
-    def get_file(self, file_path: str) -> bytes | None:
+    def get_file(self, file_path: str) -> Union[bytes, None]:
         self.logger.info(f"Getting file from '{file_path}'")
         try:
             content = self.bucket.Object(file_path)
