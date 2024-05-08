@@ -1,5 +1,5 @@
 from abc import ABC, abstractmethod
-from typing import Any
+from typing import Any, Union
 
 
 class IStorage(ABC):
@@ -14,7 +14,7 @@ class IStorage(ABC):
         raise NotImplementedError
 
     @abstractmethod
-    def get_file(self, file_path: str) -> str | None:
+    def get_file(self, file_path: str) -> Union[str, None]:
         raise NotImplementedError
 
     @property

@@ -1,4 +1,4 @@
-from typing import Literal
+from typing import Literal, Union
 from cloud_components.application.interface.infra.builder import IBuilder
 from cloud_components.application.interface.services.log.logger import ILogger
 
@@ -33,8 +33,8 @@ class InfraFactory:
         self,
         access_key: str,
         secret_access_key: str,
-        env: Literal["local"] | None = None,
-        localstack_url: str | None = None,
+        env: Union[Literal["local"], None] = None,
+        localstack_url: Union[str, None] = None,
     ) -> IBuilder:
         """
         Returns

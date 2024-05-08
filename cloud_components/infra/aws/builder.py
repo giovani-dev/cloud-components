@@ -1,4 +1,4 @@
-from typing import Literal
+from typing import Literal, Union
 from cloud_components.application.interface.infra.event import IEvent
 from cloud_components.application.interface.infra.function import IFunction
 from cloud_components.application.interface.infra.queue import IQueue
@@ -40,8 +40,8 @@ class AwsBuilder(IBuilder):
         logger: ILogger,
         access_key: str,
         secret_access_key: str,
-        env: Literal["local"] | None = None,
-        localstack_url: str | None = None,
+        env: Union[Literal["local"], None] = None,
+        localstack_url: Union[str, None] = None,
     ) -> None:
         self.logger = logger
         self.resource = ResourceConnector(

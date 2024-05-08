@@ -1,10 +1,10 @@
-from typing import Any
+from typing import Any, Union
 from cloud_components.application.interface.infra.function import IFunction
 from cloud_components.application.interface.services.log.logger import ILogger
 
 
 class Lambda(IFunction):
-    _name: str | None = None
+    _name: Union[str, None] = None
 
     def __init__(self, connection: Any, logger: ILogger) -> None:
         self.connection = connection
