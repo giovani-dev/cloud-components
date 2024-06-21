@@ -23,3 +23,7 @@ class Lambda(IFunction):
     def execute(self, payload: bytes):
         self.logger.info("Executing lambda...")
         raise NotImplementedError
+
+    @property
+    def http_router(self):
+        raise NotImplementedError

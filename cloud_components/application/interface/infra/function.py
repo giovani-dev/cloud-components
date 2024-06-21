@@ -10,3 +10,8 @@ class IFunction(ABC):
     @abstractmethod
     def execute(self, payload: bytes):
         raise NotImplementedError
+
+    @property
+    @abstractmethod
+    def http_router(self):
+        raise NotImplementedError
