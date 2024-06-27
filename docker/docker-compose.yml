@@ -19,3 +19,13 @@ services:
       - "/var/run/docker.sock:/var/run/docker.sock"
       - ./aws:/etc/localstack/init/ready.d
       - ./aws/assets:/etc/assets
+  cloud_storage:
+    container_name: "gcp-storage-emulator"
+    build:
+      context: .
+      dockerfile: gcp.Dockerfile
+    ports:
+      - 8080:8080
+    environment:
+      - BUCKET_NAME=infograficos-estaticos
+    
