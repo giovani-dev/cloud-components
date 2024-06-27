@@ -50,3 +50,11 @@ class InfraFactory:
         return AwsBuilder(
             self.logger, access_key, secret_access_key, env, localstack_url
         )
+
+    def manufacture_gcp(self) -> IBuilder:
+        self.logger.info("Manufacturing GcpBuilder class")
+        from cloud_components.infra.gcp.builder import (  # pylint: disable=C0415
+            GcpBuilder,
+        )
+
+        return GcpBuilder(self.logger)
