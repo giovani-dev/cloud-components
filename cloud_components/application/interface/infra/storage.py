@@ -14,7 +14,7 @@ class IStorage(ABC):
         raise NotImplementedError
 
     @abstractmethod
-    def get_file(self, file_path: str) -> Union[str, None]:
+    def get_file(self, file_path: str) -> Union[bytes, None]:
         raise NotImplementedError
 
     @property
