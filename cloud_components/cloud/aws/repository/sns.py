@@ -1,6 +1,7 @@
 import json
 from typing import Any, Literal, Union
 from botocore.exceptions import ClientError
+from cloud_components.common.errors.invalid_resource import ResourceNameNotFound
 from cloud_components.common.interface.cloud.event import IEvent
 from cloud_components.common.interface.libs.logger import ILogger
 
@@ -15,7 +16,9 @@ class Sns(IEvent):
     @property
     def source(self) -> Any:
         if not self._source:
-            raise ValueError("Source not found")
+            raise ResourceNameNotFound(
+                "Sns Source not found, please provide a name to it"
+            )
         return self._source
 
     @source.setter
@@ -25,7 +28,6 @@ class Sns(IEvent):
     def send(
         self, message: dict, message_structere: Union[Literal["json"], None] = None
     ) -> bool:
-        self.logger.info(f"Sending message to {self.source}")
         try:
             if message_structere:
                 self.connection.publish(
@@ -40,8 +42,7 @@ class Sns(IEvent):
                 )
         except ClientError as err:
             self.logger.error(
-                "An error occurred when try to send a message "
-                + f"to {self.source}. Error detail: {err}"
+                f"An error occurred when try to send a message. Error detail: {err}"
             )
             return False
         return True

@@ -1,5 +1,6 @@
 from typing import Any, Union
 from google.cloud import storage
+from cloud_components.common.errors.invalid_resource import ResourceNameNotFound
 from cloud_components.common.interface.cloud.storage import IStorage
 from cloud_components.common.interface.libs.logger import ILogger
 
@@ -15,6 +16,8 @@ class CloudStorage(IStorage):
 
     @property
     def bucket(self) -> Any:
+        if not self._bucket:
+            raise ResourceNameNotFound("Storage not found, please provide a name to it")
         return self._bucket
 
     @bucket.setter
@@ -36,8 +39,6 @@ class CloudStorage(IStorage):
             blob.upload_from_string(data=data, content_type=content_type)
             if is_public:
                 blob.make_public()
-            # if not is_public:
-            #     blob.make_private()
         except Exception as err:  # pylint: disable=W0718
             self.logger.error(
                 f"An error occurred when try to save a file in Cloud Storage. Error detail: {err}"
@@ -46,7 +47,6 @@ class CloudStorage(IStorage):
         return True
 
     def get_file(self, file_path: str) -> Union[bytes, None]:
-        self.logger.info(f"Getting file from '{file_path}'")
         try:
             blob = self._bucket.blob(file_path)
             return blob.download_as_bytes()

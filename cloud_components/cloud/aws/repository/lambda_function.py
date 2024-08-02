@@ -1,4 +1,5 @@
 from typing import Any, Union
+from cloud_components.common.errors.invalid_resource import ResourceNameNotFound
 from cloud_components.common.interface.cloud.function import IFunction
 from cloud_components.common.interface.libs.logger import ILogger
 
@@ -13,7 +14,9 @@ class Lambda(IFunction):
     @property
     def function(self):
         if not self._name:
-            raise ValueError("You cannot get a function name")
+            raise ResourceNameNotFound(
+                "Function not found, please provide a name to it"
+            )
         return self._name
 
     @function.setter

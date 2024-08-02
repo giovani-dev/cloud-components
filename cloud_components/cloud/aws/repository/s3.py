@@ -1,6 +1,7 @@
 from typing import Any, Union
 from botocore.exceptions import ClientError
 
+from cloud_components.common.errors.invalid_resource import ResourceNameNotFound
 from cloud_components.common.interface.cloud.storage import IStorage
 from cloud_components.common.interface.libs.logger import ILogger
 
@@ -14,6 +15,8 @@ class S3(IStorage):
 
     @property
     def bucket(self) -> Any:
+        if not self._bucket:
+            raise ResourceNameNotFound("Storage not found, please provide a name to it")
         return self._bucket
 
     @bucket.setter
@@ -29,10 +32,6 @@ class S3(IStorage):
     ) -> bool:
         try:
             if is_public:
-                self.logger.info(
-                    "Saving a file with public acl and "
-                    + f"content-type as '{content_type}' in '{file_path}'"
-                )
                 self.bucket.put_object(
                     Key=file_path,
                     Body=data,
@@ -40,9 +39,6 @@ class S3(IStorage):
                     ContentType=content_type,
                 )
             else:
-                self.logger.info(
-                    f"Saving a file with content-type as '{content_type}' in '{file_path}'"
-                )
                 self.bucket.put_object(
                     Key=file_path, Body=data, ContentType=content_type
                 )
@@ -54,7 +50,6 @@ class S3(IStorage):
         return True
 
     def get_file(self, file_path: str) -> Union[bytes, None]:
-        self.logger.info(f"Getting file from '{file_path}'")
         try:
             content = self.bucket.Object(file_path)
             content = content.get()["Body"].read()
@@ -66,7 +61,6 @@ class S3(IStorage):
         return content
 
     def ls(self, path: str) -> list[str]:  # pylint: disable=C0103
-        self.logger.info(f"Listing objects from {path}")
         return [_object.key for _object in self.bucket.objects.filter(Prefix=path)]
 
     def delete(self, file_path: str) -> bool:
