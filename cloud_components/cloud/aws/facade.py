@@ -11,7 +11,6 @@ from cloud_components.cloud.aws.factory.queue_factory import QueueFactory
 from cloud_components.cloud.aws.factory.storage_factory import StorageFactory
 
 
-# TODO: adicionar type hint para o parametro connection das classes do cloud
 class AWSFacade(ICloudFacade):
     def __init__(self, logger: ILogger, env: IEnviroment) -> None:
         self.logger = logger
