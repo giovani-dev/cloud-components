@@ -27,5 +27,3 @@ class TestAWSFacade:
         assert callback is event
         event_factory.assert_called_once_with(self.logger, self.env)
         factory.manufacture.assert_called_once_with()
-
-    
