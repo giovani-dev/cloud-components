@@ -6,6 +6,9 @@ from cloud_components.common.interface.cloud.storage import IStorage
 from cloud_components.common.interface.libs.enviroment import IEnviroment
 from cloud_components.common.interface.libs.logger import ILogger
 from cloud_components.cloud.gcp.factory.storage_factory import StorageFactory
+from cloud_components.cloud.gcp.factory.event_factory import EventFactory
+from cloud_components.cloud.gcp.factory.function_factory import FunctionFactory
+from cloud_components.cloud.gcp.factory.queue_factory import QueueFactory
 
 
 class GCSFacade(ICloudFacade):
@@ -14,13 +17,13 @@ class GCSFacade(ICloudFacade):
         self.env = env
 
     def event(self) -> IEvent:
-        raise NotImplementedError
+        return EventFactory(logger=self.logger).manufacture()
 
     def function(self) -> IFunction:
-        raise NotImplementedError
+        return FunctionFactory(logger=self.logger).manufacture()
 
     def queue(self) -> IQueue:
-        raise NotImplementedError
+        return QueueFactory(logger=self.logger).manufacture()
 
     def storage(self) -> IStorage:
         return StorageFactory(logger=self.logger).manufacture()
