@@ -2,7 +2,7 @@ from abc import ABC, abstractmethod
 from typing import Any, Callable, Union
 
 
-class IEnviroment(ABC):  # pylint: disable=C0115
+class IEnvironment(ABC):  # pylint: disable=C0115
     @abstractmethod
     def load(self) -> None:  # pylint: disable=C0116
         raise NotImplementedError
@@ -12,6 +12,6 @@ class IEnviroment(ABC):  # pylint: disable=C0115
         self,
         env_name: str,
         cast: Union[Callable[[Any], Any], None] = None,
-        defalt: Union[Any, None] = None,
+        default: Union[Any, None] = None,
     ) -> Any:
         raise NotImplementedError
