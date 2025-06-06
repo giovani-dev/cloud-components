@@ -3,12 +3,12 @@ import boto3
 from cloud_components.common.interface.factory import IFactory
 from cloud_components.common.interface.cloud.queue import IQueue
 from cloud_components.common.interface.libs.logger import ILogger
-from cloud_components.common.interface.libs.enviroment import IEnviroment
+from cloud_components.common.interface.libs.enviroment import IEnvironment
 from cloud_components.cloud.aws.repository.sqs import Sqs
 
 
 class QueueFactory(IFactory[IQueue]):
-    def __init__(self, logger: ILogger, env: IEnviroment) -> None:
+    def __init__(self, logger: ILogger, env: IEnvironment) -> None:
         self.logger = logger
         self.env = env
 

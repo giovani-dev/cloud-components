@@ -4,11 +4,11 @@ from cloud_components.cloud.aws.repository.sns import Sns
 from cloud_components.common.interface.factory import IFactory
 from cloud_components.common.interface.cloud.event import IEvent
 from cloud_components.common.interface.libs.logger import ILogger
-from cloud_components.common.interface.libs.enviroment import IEnviroment
+from cloud_components.common.interface.libs.enviroment import IEnvironment
 
 
 class Eventfactory(IFactory[IEvent]):
-    def __init__(self, logger: ILogger, env: IEnviroment) -> None:
+    def __init__(self, logger: ILogger, env: IEnvironment) -> None:
         self.logger = logger
         self.env = env
 
