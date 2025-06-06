@@ -12,18 +12,25 @@ from cloud_components.cloud.aws.factory.storage_factory import StorageFactory
 
 
 class AWSFacade(ICloudFacade):
+    """Concrete facade for AWS services."""
+
     def __init__(self, logger: ILogger, env: IEnviroment) -> None:
+        """Store the logger and environment configuration."""
         self.logger = logger
         self.env = env
 
     def event(self) -> IEvent:
+        """Return an SNS event repository instance."""
         return Eventfactory(self.logger, self.env).manufacture()
 
     def function(self) -> IFunction:
+        """Return a Lambda function repository instance."""
         return FunctionFactory(self.logger, self.env).manufacture()
 
     def queue(self) -> IQueue:
+        """Return an SQS queue repository instance."""
         return QueueFactory(self.logger, self.env).manufacture()
 
     def storage(self) -> IStorage:
+        """Return an S3 storage repository instance."""
         return StorageFactory(self.logger, self.env).manufacture()

@@ -7,19 +7,24 @@ from cloud_components.common.interface.cloud.storage import IStorage
 
 
 class ICloudFacade(ABC):
+    """High level interface for cloud service facades."""
 
     @abstractmethod
     def event(self) -> IEvent:
-        pass
+        """Return an event repository implementation."""
+        raise NotImplementedError
 
     @abstractmethod
     def function(self) -> IFunction:
-        pass
+        """Return a function repository implementation."""
+        raise NotImplementedError
 
     @abstractmethod
     def queue(self) -> IQueue:
-        pass
+        """Return a queue repository implementation."""
+        raise NotImplementedError
 
     @abstractmethod
     def storage(self) -> IStorage:
-        pass
+        """Return a storage repository implementation."""
+        raise NotImplementedError
