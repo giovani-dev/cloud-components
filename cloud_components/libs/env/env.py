@@ -31,5 +31,5 @@ class Dotenv(IEnviroment):
         default: Union[Any, None] = None,
     ) -> Any:
         """Return the environment variable ``env_name`` casted to ``cast``."""
-        value = os.getenv(env_name, defalt)
+        value = os.getenv(env_name, default)
         return value if not cast else cast(value)
