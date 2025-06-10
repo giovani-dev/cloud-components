@@ -15,7 +15,7 @@ class IEnviroment(ABC):
         self,
         env_name: str,
         cast: Union[Callable[[Any], Any], None] = None,
-        defalt: Union[Any, None] = None,
+        default: Union[Any, None] = None,
     ) -> Any:
         """Return ``env_name`` optionally cast to ``cast``."""
         raise NotImplementedError

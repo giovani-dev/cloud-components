@@ -1,7 +1,7 @@
 import os
 from typing import Any, Callable, Union
 
-from cloud_components.common.interface.libs.enviroment import IEnviroment
+from cloud_components.common.interface.libs.enviroment import IEnvironment
 from cloud_components.common.interface.libs.logger import ILogger
 
 try:
@@ -28,7 +28,7 @@ class Dotenv(IEnviroment):
         self,
         env_name: str,
         cast: Union[Callable[[Any], Any], None] = None,
-        defalt: Union[Any, None] = None,
+        default: Union[Any, None] = None,
     ) -> Any:
         """Return the environment variable ``env_name`` casted to ``cast``."""
         value = os.getenv(env_name, defalt)
