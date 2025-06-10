@@ -1,3 +1,4 @@
+# pylint: disable=attribute-defined-outside-init
 from unittest.mock import Mock
 from botocore.exceptions import ClientError
 
