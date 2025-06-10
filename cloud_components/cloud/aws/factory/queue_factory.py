@@ -8,11 +8,15 @@ from cloud_components.cloud.aws.repository.sqs import Sqs
 
 
 class QueueFactory(IFactory[IQueue]):
+    """Factory that builds AWS SQS queue repositories."""
+
     def __init__(self, logger: ILogger, env: IEnviroment) -> None:
+        """Store dependencies used to build the repository."""
         self.logger = logger
         self.env = env
 
     def manufacture(self) -> IQueue:
+        """Return a configured :class:`Sqs` repository instance."""
         connection = boto3.resource(
             "sqs",
             aws_access_key_id=self.env.get("AWS_ACCESS_KEY"),

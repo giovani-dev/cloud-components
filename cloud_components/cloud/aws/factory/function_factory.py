@@ -8,11 +8,15 @@ from cloud_components.common.interface.libs.enviroment import IEnviroment
 
 
 class FunctionFactory(IFactory[IFunction]):
+    """Factory that builds Lambda function repositories."""
+
     def __init__(self, logger: ILogger, env: IEnviroment) -> None:
+        """Persist construction dependencies."""
         self.logger = logger
         self.env = env
 
     def manufacture(self) -> IFunction:
+        """Return a configured :class:`Lambda` repository instance."""
         connection = boto3.client(
             "lambda",
             aws_access_key_id=self.env.get("AWS_ACCESS_KEY"),
