@@ -12,7 +12,10 @@ from cloud_components.cloud.gcp.factory.queue_factory import QueueFactory
 
 
 class GCSFacade(ICloudFacade):
+    """Facade exposing Google Cloud services."""
+
     def __init__(self, logger: ILogger, env: IEnviroment) -> None:
+        """Save logger and environment references."""
         self.logger = logger
         self.env = env
 
@@ -26,4 +29,5 @@ class GCSFacade(ICloudFacade):
         return QueueFactory(logger=self.logger).manufacture()
 
     def storage(self) -> IStorage:
+        """Return a Cloud Storage repository instance."""
         return StorageFactory(logger=self.logger).manufacture()

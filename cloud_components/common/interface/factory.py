@@ -5,6 +5,9 @@ T = TypeVar("T")
 
 
 class IFactory(ABC, Generic[T]):
+    """Generic factory interface."""
+
     @abstractmethod
     def manufacture(self) -> T:
-        pass
+        """Return a new instance of ``T``."""
+        raise NotImplementedError
