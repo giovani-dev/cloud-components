@@ -3,16 +3,20 @@ import boto3
 from cloud_components.common.interface.factory import IFactory
 from cloud_components.common.interface.cloud.queue import IQueue
 from cloud_components.common.interface.libs.logger import ILogger
-from cloud_components.common.interface.libs.enviroment import IEnvironment
+from cloud_components.common.interface.libs.enviroment import IEnviroment
 from cloud_components.cloud.aws.repository.sqs import Sqs
 
 
 class QueueFactory(IFactory[IQueue]):
-    def __init__(self, logger: ILogger, env: IEnvironment) -> None:
+    """Factory that builds AWS SQS queue repositories."""
+
+    def __init__(self, logger: ILogger, env: IEnviroment) -> None:
+        """Store dependencies used to build the repository."""
         self.logger = logger
         self.env = env
 
     def manufacture(self) -> IQueue:
+        """Return a configured :class:`Sqs` repository instance."""
         connection = boto3.resource(
             "sqs",
             aws_access_key_id=self.env.get("AWS_ACCESS_KEY"),
