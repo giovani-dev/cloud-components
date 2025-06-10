@@ -28,6 +28,18 @@ class Lambda(IFunction):
         """Set the Lambda function name."""
         self._name = value
 
-    def execute(self, payload: bytes) -> Any:
-        """Execute the Lambda with the given payload."""
-        raise NotImplementedError
+    def execute(self, payload: bytes):
+        try:
+            response = self.connection.invoke(
+                FunctionName=self.function,
+                Payload=payload,
+            )
+            result = response.get("Payload")
+            if hasattr(result, "read"):
+                return result.read()
+            return result
+        except Exception as err:  # pylint: disable=W0718
+            self.logger.error(
+                f"An error occurred when try to execute a function. Error detail: {err}"
+            )
+            return None

@@ -41,5 +41,16 @@ class Sqs(IQueue):
         return True
 
     def receive_message(self) -> str:
-        """Receive a message from the queue."""
-        raise NotImplementedError
+        try:
+            messages = self.queue.receive_messages(MaxNumberOfMessages=1)
+            if not messages:
+                return ""
+            message = messages[0]
+            body = message.body
+            message.delete()
+            return body
+        except ClientError as err:
+            self.logger.error(
+                f"An error occurred when try to receive a message. Error detail: {err}"
+            )
+            return ""
