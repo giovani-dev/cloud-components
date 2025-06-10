@@ -1,7 +1,7 @@
 import os
 from typing import Any, Callable, Union
 
-from cloud_components.common.interface.libs.enviroment import IEnvironment
+from cloud_components.common.interface.libs.enviroment import IEnviroment
 from cloud_components.common.interface.libs.logger import ILogger
 
 try:

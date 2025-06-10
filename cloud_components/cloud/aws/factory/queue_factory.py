@@ -3,7 +3,7 @@ import boto3
 from cloud_components.common.interface.factory import IFactory
 from cloud_components.common.interface.cloud.queue import IQueue
 from cloud_components.common.interface.libs.logger import ILogger
-from cloud_components.common.interface.libs.enviroment import IEnvironment
+from cloud_components.common.interface.libs.enviroment import IEnviroment
 from cloud_components.cloud.aws.repository.sqs import Sqs
 
 

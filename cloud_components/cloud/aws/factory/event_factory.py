@@ -4,7 +4,7 @@ from cloud_components.cloud.aws.repository.sns import Sns
 from cloud_components.common.interface.factory import IFactory
 from cloud_components.common.interface.cloud.event import IEvent
 from cloud_components.common.interface.libs.logger import ILogger
-from cloud_components.common.interface.libs.enviroment import IEnvironment
+from cloud_components.common.interface.libs.enviroment import IEnviroment
 
 
 class Eventfactory(IFactory[IEvent]):

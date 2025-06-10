@@ -4,7 +4,7 @@ from cloud_components.cloud.aws.repository.lambda_function import Lambda
 from cloud_components.common.interface.factory import IFactory
 from cloud_components.common.interface.cloud.function import IFunction
 from cloud_components.common.interface.libs.logger import ILogger
-from cloud_components.common.interface.libs.enviroment import IEnvironment
+from cloud_components.common.interface.libs.enviroment import IEnviroment
 
 
 class FunctionFactory(IFactory[IFunction]):
